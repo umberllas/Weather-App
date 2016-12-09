@@ -1,0 +1,170 @@
+/* Empty. Add your own CSS if you like */
+html{
+	height:100%;
+}
+body{
+	height:100%;
+}
+.slider{
+	height:100%;
+}
+.green{
+	/*background-color:linear-gradient(#9EF074,#83E382)*/
+	background:#83E382;
+}
+.blue{
+	/*background-color:linear-gradient(#86CAF9,#5BB7F8)*/
+	background:#5BB7F8;
+}
+.pink{
+	/*background-color:linear-gradient(#F695CA,#C672E2)*/
+	background:#C672E2;
+}
+.orangered{
+	background-color:orangered;
+}
+.slider-slide{
+	text-align:center;
+	color:yellow;
+	padding-top:93px;
+}
+.slider-slide span{
+	font-size:45vw;
+}
+.slider-slide h2{
+	color:white;
+	margin-bottom:10vh;
+	font-size:5vh;
+}
+.slider-slide h4{
+	color:white;
+	font-size:5vh;
+	margin-top:10vh;
+}
+.slider-slide h1{
+	color:white;
+	margin:1vh auto 10vh;
+	font-size:7vh;
+}
+.slider-slide .button{
+	color:white;
+	background-color:orangered;
+	font-size:5vh;
+}
+.slider-slide small{
+	font-size:4vh;
+}
+
+.button{
+	border:none;
+}
+.buttons .large-font{
+	font-size:18px;
+}
+.large{
+	width:65%;
+}
+.tab-item-active{
+	border-bottom: 4px solid red;
+}
+.modal-backdrop{
+	height:50%;
+	top:50%;
+}
+.detial{
+	position:absolute;
+	bottom: 0;
+	width:100%;
+	z-index:10;
+	background:white;
+	opacity:0.5;
+	color:black;
+}
+
+
+.ng-animate{
+	transition:all 1s linear;
+}
+.ng-enter{
+	top:0;
+}
+.ng-enter-active{
+	top:50%;
+}
+.ng-leave{
+	top:50%;
+}
+.ng-leave-active{
+	top:0;
+}
+.left-btn{
+	margin-left:70vw;
+}
+.input-large{
+	width:80%;
+	background:#444;
+	border:none;
+	border-bottom:1px solid red;
+	padding-left:0px;
+	margin-left:10px;
+}
+.small-item span{
+	font-size:20px;
+}
+.padding-item{
+	top:93px;
+}
+.text-left{
+	text-align:left;
+	font-size:30px;
+	padding-top:15px;
+	padding-left:20px;	
+}
+.has-border-bt{
+	border-bottom:1px solid #ccc;
+}
+
+.float-left{
+	float:left;
+	width:50%;
+}
+.has-border-rg{
+	padding-top:20px;
+	font-size:30px;
+}
+.item{
+	padding:0;
+}
+.small-item .font-small{
+	font-size:14px;
+}
+.darker{
+	font-size:20px;
+	font-weight:500;
+	vertical-align: middle;
+	text-align:right;
+	padding-top:15px;
+	padding-right:75px;
+}
+.darker span{
+	font-weight:normal;
+}
+.margin-bt{
+	margin-bottom:20px;
+}
+.abso{
+	position:absolute;
+	width:100vw;
+	height:calc(100vh - 0px);
+	left:0;
+}
+.city{
+	line-height:30px;
+	padding-left:20px;
+}
+#search{
+	color:white;
+}
+a{
+	text-decoration: none;
+}

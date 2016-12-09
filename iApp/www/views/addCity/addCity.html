@@ -1,0 +1,22 @@
+<ion-view>
+    <ion-header-bar class="bar-dark">
+        <a class="buttons" href="#/city">
+            <span class="icon button ion-chevron-left"></span>
+        </a>
+        <label class="item item-input input-large">
+            <input type="text" placeholder="搜索城市" id='search' ng-model='city'>
+        </label>
+    </ion-header-bar>
+    <ion-content>
+        <ion-list ng-if='show' data-id={{cityList.id}}>
+            <a href="#/home">
+                <ion-item>
+                <div class="row city">
+                        <span>{{cityList.cityName}} </span>
+                        <span> ,{{cityList.cityProvince}}</span>
+                </div>
+                </ion-item>
+            </a>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,71 @@
+<ion-view view-title='天气预报'>
+    <ion-header-bar class="bar-dark">
+        <a class="buttons" href="#/city">
+            <span class="icon button ion-chevron-left"></span>
+        </a>
+        <div class="buttons button-dark large">
+            <button class="button large-font icon-right ion-arrow-down-b">
+                郑州市
+            </button>
+        </div>
+        <a class="button icon ion-plus button-icon" href='#/addCity'></a>
+        <button class="button icon ion-android-more-vertical button-icon"></button>
+    </ion-header-bar>
+    
+    <ion-slide-box show-pager="false" on-slide-changed="slideChanged($index)">
+        <ion-slide ng-click='showClude()'>
+            <img src="{{current.srcBig}}" alt="" class="abso">
+            <div class="detial">
+                <ng-include class="popUp" src='clude'></ng-include>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <ion-content class="padding-item">
+                <ion-list>
+                    <ion-item ng-repeat="list in hourList" class="small-item">
+                        <div class="row">
+                            <div class="col hourImg"><img src={{list.src}} alt=""></div>
+                            <div class="col">
+                                <span>{{list.sj | getHour}}</span><br>
+                                <span class="font-small">{{list.tq}}</span>
+                            </div>
+                            <div class="col-80 darker">{{list.qw}}℃</div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-slide>
+        <ion-slide>
+            <ion-content class="padding-item">
+                <ion-list>
+                    <ion-item ng-repeat="list in predictList" class="small-item">
+                        <div class="row">
+                            <!--<div class="col hourImg"><img src={{list.src}} alt=""></div>-->
+                            <div class="col">
+                                <span>{{list.date}}</span><br>
+                                <span class="font-small">{{list.tq1}}</span>
+                            </div>
+                            <div class="col-80 darker">{{list.qw1}}℃<span> / {{list.qw2}}℃</span></div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-slide>
+    </ion-slide-box>
+
+
+    <ion-tabs class="tabs-dark tabs-top">
+        <ion-tab title="目前" on-select="selectedTab()">
+            
+        </ion-tab>
+        <ion-tab title="每小时" on-select="selectedTab()">
+            
+        </ion-tab>
+        <ion-tab title="预测" on-select="selectedTab()">
+            
+        </ion-tab>
+    </ion-tabs>
+
+    
+    
+</ion-view>
