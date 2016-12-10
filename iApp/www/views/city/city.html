@@ -6,6 +6,10 @@
     </ion-header-bar>
     <ion-content>
         <ion-list>
+            <ion-item ng-repeat="list in cityList" ui-sref='home' data-id={{list.id}}>
+                <span>{{list.cityName}} </span>
+                <span> ,{{list.cityProvince}}</span>
+            </ion-item>
             <ion-item ui-sref='home'>
                 郑州市
             </ion-item>
