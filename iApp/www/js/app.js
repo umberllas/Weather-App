@@ -57,10 +57,10 @@ angular.module('starter', ['ionic'])
   });
 })
 .controller('indexController',function(){
-    var cityList = [{
+    var cityList = {
         cityName:'北京',
         cityProvince:'北京',
         id:'CH010100'
-    }];
-    localStorage.cityList = JSON.stringify(cityList);
+    };
+    localStorage.currentCity = JSON.stringify(cityList);
 })

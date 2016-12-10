@@ -61,5 +61,7 @@ angular.module('starter')
             $scope.city = '';
             $scope.show = '';
         })
+        console.log($scope.cityList)
+        localStorage.currentCity = JSON.stringify($scope.cityList);
     })
 }])

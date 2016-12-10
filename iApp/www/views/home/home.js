@@ -3,20 +3,29 @@ angular.module('starter')
     // console.log($ionicSlideBoxDelegate)
     // console.log($ionicTabsDelegate)
 
+    var currentCity = JSON.parse(localStorage.currentCity);
+    console.log(currentCity.id)
+
+
+
 
     $scope.clude = 'views/home/slide/detial.html';
 
     // tabs绑定slide
     $scope.selectedTab = function(){
+        currentCity = JSON.parse(localStorage.currentCity);
+        $scope.currentCity = currentCity.cityName; 
+        console.log($scope.current);
+        console.log(currentCity);
         var index = $ionicTabsDelegate.selectedIndex();
         console.log(index)
         $ionicSlideBoxDelegate.slide(index);
         
         if(index == 1){
-            $.getJSON('http://api.yytianqi.com/weatherhours?city=CH010100&key=3n2bve9p3w84bfks')
+            $.getJSON('http://api.yytianqi.com/weatherhours?city=' + currentCity.id + '&key=3n2bve9p3w84bfks')
             .done(function(data){
                 $scope.hourList = data.data.list;
-                
+                console.log($scope.hourList);
                 getSrc($scope.hourList);
                 
             })
@@ -25,7 +34,7 @@ angular.module('starter')
             })
         }
         if(index == 2){
-            $.getJSON('http://api.yytianqi.com/forecast7d?city=CH010100&key=3n2bve9p3w84bfks')
+            $.getJSON('http://api.yytianqi.com/forecast7d?city=' + currentCity.id + '&key=3n2bve9p3w84bfks')
             .done(function(data){
                 console.log(data);
                 $scope.predictList = data.data.list;
@@ -36,7 +45,7 @@ angular.module('starter')
         }
         if(index == 0){
             console.log('index=0')
-            $.getJSON('http://api.yytianqi.com/observe?city=CH010100&key=3n2bve9p3w84bfks')
+            $.getJSON('http://api.yytianqi.com/observe?city=' + currentCity.id + '&key=3n2bve9p3w84bfks')
             .done(function(data){
                 console.log(data)
                 $scope.current = data.data;
