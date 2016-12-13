@@ -1,6 +1,7 @@
 angular.module('starter')
 .controller('addCityController',['$scope',function($scope){
     $scope.show = '';
+    
     $('body').delegate('#search','keyup',function(){
         var city = $scope.city;
         $scope.cityList = {};
@@ -14,6 +15,7 @@ angular.module('starter')
                 
                 for(var j = 0; j<diShi.length; j++){
                     if(diShi[j].name == city){
+                        // console.log('true')
                         cityExists = 'false';
                         var cityName = diShi[j].name;
                         var cityProvince = citylist[i].name;
@@ -25,6 +27,7 @@ angular.module('starter')
                                 id:id
                             };
                             var exists = 'true';
+                            
                             var cityList = JSON.parse(localStorage.cityList);
                             for(var k = 0; k< cityList.length; k++){
                                 if(cityList[k].cityName == cityName){

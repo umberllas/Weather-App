@@ -4,7 +4,7 @@
             <span class="icon button ion-chevron-left"></span>
         </a>
         <div class="buttons button-dark large">
-            <button class="button large-font icon-right ion-arrow-down-b">
+            <button class="button large-font icon-right ion-arrow-down-b" ng-click="openModal()">
                 {{currentCity}}
             </button>
         </div>
@@ -66,6 +66,18 @@
         </ion-tab>
     </ion-tabs>
 
-    
+    <script id="modal.html" type="text/ng-template">
+        <ion-header-bar>
+            <h1 class='title'>选取城市</h1>
+        </ion-header-bar>
+        <ion-content>
+            <ion-list>
+                <ion-item ng-repeat='city in cityList' class='cityName' data-id={{city.id}}>
+                    <span>{{city.cityName}}</span>,
+                    <span> {{city.cityProvince}}</span>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </script>
     
 </ion-view>

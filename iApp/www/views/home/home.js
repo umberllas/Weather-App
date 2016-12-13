@@ -1,13 +1,44 @@
 angular.module('starter')
-.controller('homeController',['$scope','$ionicSlideBoxDelegate','$ionicTabsDelegate',function($scope,$ionicSlideBoxDelegate,$ionicTabsDelegate){
+.controller('homeController',['$scope','$ionicSlideBoxDelegate','$ionicTabsDelegate','$ionicModal','$timeout',function($scope,$ionicSlideBoxDelegate,$ionicTabsDelegate,$ionicModal,$timeout){
     // console.log($ionicSlideBoxDelegate)
     // console.log($ionicTabsDelegate)
-
     var currentCity = JSON.parse(localStorage.currentCity);
     console.log(currentCity.id)
 
+    $scope.$on('$ionicView.beforeEnter',function(){
+        currentCity = JSON.parse(localStorage.currentCity);
+    });
+
+    $ionicModal.fromTemplateUrl('modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+
+    $scope.openModal = function(){
+        $scope.cityList = JSON.parse(localStorage.cityList);
+        // $scope.$apply();
+        $scope.modal.show();
+    };
 
 
+    $('body').delegate('.cityName','click',function(){
+        $scope.modal.hide();
+        var cityName = $(this).find('span').first().text();
+        var cityProvince = $(this).find('span').last().text();
+        var id = $(this).attr('data-id');
+        localStorage.currentCity = JSON.stringify({
+            cityName:cityName,
+            cityProvince:cityProvince,
+            id:id    
+        });
+    });
+
+
+    $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+    });
 
     $scope.clude = 'views/home/slide/detial.html';
 
@@ -15,18 +46,17 @@ angular.module('starter')
     $scope.selectedTab = function(){
         currentCity = JSON.parse(localStorage.currentCity);
         $scope.currentCity = currentCity.cityName; 
-        console.log($scope.current);
-        console.log(currentCity);
         var index = $ionicTabsDelegate.selectedIndex();
-        console.log(index)
         $ionicSlideBoxDelegate.slide(index);
         
         if(index == 1){
-            $.getJSON('http://api.yytianqi.com/weatherhours?city=' + currentCity.id + '&key=3n2bve9p3w84bfks')
+            $.getJSON('http://api.yytianqi.com/weatherhours?city=' + currentCity.id + '&key=u3uwjc25e4wlio7d')
             .done(function(data){
                 $scope.hourList = data.data.list;
+                
                 console.log($scope.hourList);
                 getSrc($scope.hourList);
+                $scope.$apply();
                 
             })
             .fail(function(err){
@@ -34,30 +64,33 @@ angular.module('starter')
             })
         }
         if(index == 2){
-            $.getJSON('http://api.yytianqi.com/forecast7d?city=' + currentCity.id + '&key=3n2bve9p3w84bfks')
+            $.getJSON('http://api.yytianqi.com/forecast7d?city=' + currentCity.id + '&key=u3uwjc25e4wlio7d')
             .done(function(data){
                 console.log(data);
                 $scope.predictList = data.data.list;
+                $scope.$apply();
             })
             .fail(function(err){
                 console.log(err)
             })
         }
         if(index == 0){
+            currentCity = JSON.parse(localStorage.currentCity);
             console.log('index=0')
-            $.getJSON('http://api.yytianqi.com/observe?city=' + currentCity.id + '&key=3n2bve9p3w84bfks')
+            $.getJSON('http://api.yytianqi.com/observe?city=' + currentCity.id + '&key=u3uwjc25e4wlio7d')
             .done(function(data){
                 console.log(data)
                 $scope.current = data.data;
                     var time = $scope.current.lastUpdate.substr(11,2);
                     time = Number(time);
-                    if(time > 5 && time < 17){
+                    if(time > 5 && time < 19){
                         $scope.current.src = 'img/00_0.png';
                         $scope.current.srcBig = 'img/00_1.gif';
                     }else{
                         $scope.current.src = 'img/00_1.png';
                         $scope.current.srcBig = 'img/00_0.gif';
                     }
+                    $scope.$apply();
             })
             .fail(function(err){
                 console.log(err)
@@ -65,13 +98,14 @@ angular.module('starter')
         }
     };
 
-    $scope.$on('$ionicView.beforeEnter',function(){
-        console.log('kkkkk')
-    })
+    // $scope.$on('$ionicView.beforeEnter',function(){
+    //     console.log('kkkkk')
+    // })
 
     // slide绑定tabs
     $scope.slideChanged = function(index){
         console.log(index);
+        currentCity = JSON.parse(localStorage.currentCity);
         $ionicTabsDelegate._instances[0].select(index);
     };
 
