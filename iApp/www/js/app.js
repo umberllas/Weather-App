@@ -56,7 +56,7 @@ angular.module('starter', ['ionic'])
     }
   });
 })
-.controller('indexController',function(){
+.controller('indexController',['$scope',function($scope){
     var citylist = {
         cityName:'北京',
         cityProvince:'北京',
@@ -68,9 +68,41 @@ angular.module('starter', ['ionic'])
         cityProvince:'北京',
         id:'CH010100'
     }]);
-})
+
+    function myFun(result){
+        $scope.locationCiyt = result.name;
+        $scope.locationCiyt = $scope.locationCiyt.slice(0,$scope.locationCiyt.length-1);
+         $.getJSON('http://api.yytianqi.com/citylist/id/1')
+        .done(function(data){
+            var citylist = data.list;
+            
+            for(var i =0; i<citylist.length; i++){
+                var diShi = citylist[i].list;
+                for(var j = 0; j<diShi.length; j++){   
+                    if(diShi[j].name == $scope.locationCiyt + ''){
+                        var cityName = diShi[j].name;
+                        var cityProvince = citylist[i].name;
+                        var id = diShi[j].list[0].city_id;
+                        localStorage.locationCiyt = JSON.stringify({
+                            cityName:cityName,
+                            cityProvince:cityProvince,
+                            id:id
+                        });
+                    }
+                }
+            }
+        })
+        .fail(function(err){
+            console.log(err);
+        });
+    }
+    var myCity = new BMap.LocalCity();
+    myCity.get(myFun);
+   
+
+}])
 .service('getCurrent',function(){
     return function(){
         
-    }
-})
+    };
+});

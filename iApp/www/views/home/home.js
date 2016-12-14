@@ -3,7 +3,10 @@ angular.module('starter')
     // console.log($ionicSlideBoxDelegate)
     // console.log($ionicTabsDelegate)
     var currentCity = JSON.parse(localStorage.currentCity);
-    console.log(currentCity.id)
+    // console.log(currentCity.id)
+
+
+    
 
     $scope.$on('$ionicView.beforeEnter',function(){
         currentCity = JSON.parse(localStorage.currentCity);

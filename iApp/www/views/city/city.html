@@ -6,6 +6,11 @@
     </ion-header-bar>
     <ion-content>
             <ion-list>
+                <ion-item ui-sref='home' data-id={{locationCity.id}}>
+                    <span>{{locationCity.cityName}} </span>,
+                    <span> {{locationCity.cityProvince}}</span>
+                    <i>(定位城市)</i>
+                </ion-item>
                 <ion-item ng-repeat="list in cityList" ui-sref='home' data-id={{list.id}}>
                     <span>{{list.cityName}} </span>,
                     <span> {{list.cityProvince}}</span>
