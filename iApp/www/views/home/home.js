@@ -1,15 +1,31 @@
 angular.module('starter')
 .controller('homeController',['$scope','$ionicSlideBoxDelegate','$ionicTabsDelegate','$ionicModal','$timeout',function($scope,$ionicSlideBoxDelegate,$ionicTabsDelegate,$ionicModal,$timeout){
-    // console.log($ionicSlideBoxDelegate)
-    // console.log($ionicTabsDelegate)
     var currentCity = JSON.parse(localStorage.currentCity);
-    // console.log(currentCity.id)
-
-
-    
 
     $scope.$on('$ionicView.beforeEnter',function(){
+        console.log('页面进入');
+        $ionicSlideBoxDelegate.slide(0);
         currentCity = JSON.parse(localStorage.currentCity);
+        console.log(currentCity.cityName)
+        $scope.currentCity = currentCity.cityName;
+        console.log($scope.currentCity);
+        $.getJSON('http://api.yytianqi.com/observe?city=' + currentCity.id + '&key=u3uwjc25e4wlio7d')
+        .done(function(data){
+            $scope.current = data.data;
+                var time = $scope.current.lastUpdate.substr(11,2);
+                time = Number(time);
+                if(time > 5 && time < 19){
+                    $scope.current.src = 'img/00_0.png';
+                    $scope.current.srcBig = 'img/00_1.gif';
+                }else{
+                    $scope.current.src = 'img/00_1.png';
+                    $scope.current.srcBig = 'img/00_0.gif';
+                }
+                $scope.$apply();
+        })
+        .fail(function(err){
+            console.log(err);
+        });
     });
 
     $ionicModal.fromTemplateUrl('modal.html', {
@@ -63,7 +79,7 @@ angular.module('starter')
                 
             })
             .fail(function(err){
-                console.log(err)
+                console.log(err);
             })
         }
         if(index == 2){
