@@ -63,8 +63,7 @@ angular.module('starter')
         $scope.$apply(function(){
             $scope.city = '';
             $scope.show = '';
-        })
-        console.log($scope.cityList)
+        });
         localStorage.currentCity = JSON.stringify($scope.cityList);
-    })
-}])
+    });
+}]);

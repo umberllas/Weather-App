@@ -1,8 +1,13 @@
 angular.module('starter')
 .controller('homeController',['$scope','$ionicSlideBoxDelegate','$ionicTabsDelegate','$ionicModal','$timeout',function($scope,$ionicSlideBoxDelegate,$ionicTabsDelegate,$ionicModal,$timeout){
-    var currentCity = JSON.parse(localStorage.currentCity);
+    var currentCity;
 
     $scope.$on('$ionicView.beforeEnter',function(){
+        $ionicSlideBoxDelegate.slide(0);
+        currentCity = JSON.parse(localStorage.currentCity);
+        $scope.currentCity = currentCity.cityName;
+    });
+    $scope.$on('$ionicView.afterEnter',function(){
         console.log('页面进入');
         $ionicSlideBoxDelegate.slide(0);
         currentCity = JSON.parse(localStorage.currentCity);
